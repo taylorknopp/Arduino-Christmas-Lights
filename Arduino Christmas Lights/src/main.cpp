@@ -4,6 +4,9 @@
 #define LED_PIN     5
 int numLEDs;
 byte ledInpuSwitches;
+void flashGreenRed(void);
+void (*effects[5])();
+Adafruit_NeoPixel strip;
 
 void setup() {
 
@@ -32,8 +35,11 @@ void setup() {
 
   //Taking the base number and doubling it if necessary
   numLEDs = (int)ledInpuSwitches * (digitalRead(30) + 1);
-  Adafruit_NeoPixel strip = Adafruit_NeoPixel(numLEDs, LED_PIN, NEO_GRB + NEO_KHZ800);
-  
+  strip = Adafruit_NeoPixel(numLEDs, LED_PIN, NEO_GRB + NEO_KHZ800);
+  //Setup Pointer array for effects functions
+  effects[0] = flashGreenRed;
+  effects[1] = flashBlueRed;
+  effects[2] = flashBlueGreen;
   
 
 }
@@ -47,8 +53,40 @@ void loop() {
 
 void flashGreenRed()
 {
-  for(int i = 0; i< numLEDs; i++)
+  for(int i = 0; i< numLEDs; i += 2)
   {
-    
+    strip.setPixelColor(i,255,0,0);
   }
+  delay(1000);
+  for(int i = 0; i< numLEDs; i += 2)
+  {
+    strip.setPixelColor(i,0,255,0);
+  }
+  delay(1000);
+}
+void flashBlueRed()
+{
+  for(int i = 0; i< numLEDs; i ++)
+  {
+    strip.setPixelColor(i,255,0,0);
+  }
+  delay(1000);
+  for(int i = 0; i< numLEDs; i ++)
+  {
+    strip.setPixelColor(i,0,0,255);
+  }
+  delay(1000);
+}
+void flashBlueGreen()
+{
+  for(int i = 0; i< numLEDs; i ++)
+  {
+    strip.setPixelColor(i,0,0,255);
+  }
+  delay(1000);
+  for(int i = 0; i< numLEDs; i ++)
+  {
+    strip.setPixelColor(i,0,255,0);
+  }
+  delay(1000);
 }
