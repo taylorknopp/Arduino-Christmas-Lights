@@ -10,31 +10,32 @@ Adafruit_NeoPixel strip;
 
 void setup() {
 
-  //setup inut output pins as input or output
-
+  //setup inut output pins as input or output  Yes the numbers are weird, It;s because of the weird forfactor of the ESP32 Dekit-1 That I chose
+  //The numbers are out of order here so they line up nice in the circuit design, makes my life easier.
   pinMode(LED_PIN,OUTPUT);
-  pinMode(22,INPUT);
-  pinMode(23,INPUT);
-  pinMode(24,INPUT);
-  pinMode(25,INPUT);
-  pinMode(26,INPUT);
-  pinMode(27,INPUT);
-  pinMode(28,INPUT);
-  pinMode(29,INPUT);
-  pinMode(30,INPUT);
+  pinMode(6,INPUT);
+  pinMode(7,INPUT);
+  pinMode(8,INPUT);
+  pinMode(15,INPUT);
+  pinMode(2,INPUT);
+  pinMode(0,INPUT);
+  pinMode(4,INPUT);
+  pinMode(16,INPUT);
+  pinMode(17,INPUT);
+  pinMode(5,OUTPUT);
 
   //Taking inthe switch values and detemining the umber of LEDs present in the Light.  Thanks to Brendon Gluth(https://github.com/BGluth) for help with the boolean logic in this part of the code.
-  ledInpuSwitches |= digitalRead(22) << 0;
-  ledInpuSwitches |= digitalRead(23) << 1;
-  ledInpuSwitches |= digitalRead(24) << 2;
-  ledInpuSwitches |= digitalRead(25) << 3;
-  ledInpuSwitches |= digitalRead(26) << 4; 
-  ledInpuSwitches |= digitalRead(27) << 5;
-  ledInpuSwitches |= digitalRead(28) << 6;
-  ledInpuSwitches |= digitalRead(29) << 7;
+  ledInpuSwitches |= digitalRead(6) << 0;
+  ledInpuSwitches |= digitalRead(7) << 1;
+  ledInpuSwitches |= digitalRead(8) << 2;
+  ledInpuSwitches |= digitalRead(15) << 3;
+  ledInpuSwitches |= digitalRead(2) << 4; 
+  ledInpuSwitches |= digitalRead(0) << 5;
+  ledInpuSwitches |= digitalRead(4) << 6;
+  ledInpuSwitches |= digitalRead(16) << 7;
 
   //Taking the base number and doubling it if necessary
-  numLEDs = (int)ledInpuSwitches * (digitalRead(30) + 1);
+  numLEDs = (int)ledInpuSwitches * (digitalRead(17) + 1);
   strip = Adafruit_NeoPixel(numLEDs, LED_PIN, NEO_GRB + NEO_KHZ800);
   //Setup Pointer array for effects functions
   effects[0] = flashGreenRed;
@@ -44,10 +45,9 @@ void setup() {
 
 }
 
-void loop() {
-
-
-  // put your main code here, to run repeatedly:
+void loop() 
+{
+    
 }
 
 
