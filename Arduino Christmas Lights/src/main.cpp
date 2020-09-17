@@ -22,6 +22,7 @@ void setup() {
   pinMode(4,INPUT);
   pinMode(16,INPUT);
   pinMode(17,INPUT);
+  pinMode(18,INPUT);
   pinMode(5,OUTPUT);
 
   //Taking inthe switch values and detemining the umber of LEDs present in the Light.  Thanks to Brendon Gluth(https://github.com/BGluth) for help with the boolean logic in this part of the code.
@@ -41,6 +42,10 @@ void setup() {
   effects[0] = flashGreenRed;
   effects[1] = flashBlueRed;
   effects[2] = flashBlueGreen;
+  effects[3] = flashRed;
+  effects[4] = flashGreen;
+  effects[5] = flashBlue;
+  effects[7] = flashPink;
   
 
 }
@@ -87,6 +92,58 @@ void flashBlueGreen()
   for(int i = 0; i< numLEDs; i ++)
   {
     strip.setPixelColor(i,0,255,0);
+  }
+  delay(1000);
+}
+void flashRed()
+{
+  for(int i = 0; i< numLEDs; i ++)
+  {
+    strip.setPixelColor(i,255,0,0);
+  }
+  delay(1000);
+  for(int i = 0; i< numLEDs; i ++)
+  {
+    strip.setPixelColor(i,0,0,0);
+  }
+  delay(1000);
+}
+void flashGreen()
+{
+  for(int i = 0; i< numLEDs; i ++)
+  {
+    strip.setPixelColor(i,0,255,0);
+  }
+  delay(1000);
+  for(int i = 0; i< numLEDs; i ++)
+  {
+    strip.setPixelColor(i,0,0,0);
+  }
+  delay(1000);
+}
+void flashBlue()
+{
+  for(int i = 0; i< numLEDs; i ++)
+  {
+    strip.setPixelColor(i,0,0,255);
+  }
+  delay(1000);
+  for(int i = 0; i< numLEDs; i ++)
+  {
+    strip.setPixelColor(i,0,0,0);
+  }
+  delay(1000);
+}
+void flashPink()
+{
+  for(int i = 0; i< numLEDs; i ++)
+  {
+    strip.setPixelColor(i,216,0,255);
+  }
+  delay(1000);
+  for(int i = 0; i< numLEDs; i ++)
+  {
+    strip.setPixelColor(i,0,0,0);
   }
   delay(1000);
 }
