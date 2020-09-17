@@ -2,12 +2,12 @@
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
 #define LED_PIN     5
+#define numEffects  8
 int numLEDs;
 byte ledInpuSwitches;
-void flashGreenRed(void);
-void (*effects[5])();
+void (*effects[numEffects])();
 Adafruit_NeoPixel strip;
-
+int mode;
 void setup() {
 
   //setup inut output pins as input or output  Yes the numbers are weird, It;s because of the weird forfactor of the ESP32 Dekit-1 That I chose
@@ -37,6 +37,7 @@ void setup() {
 
   //Taking the base number and doubling it if necessary
   numLEDs = (int)ledInpuSwitches * (digitalRead(17) + 1);
+  //Initialize Leds Strip/string
   strip = Adafruit_NeoPixel(numLEDs, LED_PIN, NEO_GRB + NEO_KHZ800);
   //Setup Pointer array for effects functions
   effects[0] = flashGreenRed;
@@ -46,7 +47,10 @@ void setup() {
   effects[4] = flashGreen;
   effects[5] = flashBlue;
   effects[7] = flashPink;
-  
+  //setup he interupt
+  attachInterrupt(18, changeMode, RISING);
+  //set starting mode;
+  mode = 0;
 
 }
 
@@ -146,4 +150,17 @@ void flashPink()
     strip.setPixelColor(i,0,0,0);
   }
   delay(1000);
+}
+void changeMode()
+{
+
+  if(mode > numEffects - 1)
+  {
+    mode++;
+  }
+  else
+  {
+    mode = 0;
+  }
+
 }
