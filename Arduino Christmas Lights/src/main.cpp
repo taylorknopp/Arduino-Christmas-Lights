@@ -10,7 +10,7 @@ Adafruit_NeoPixel strip;
 int mode;
 void setup() {
 
-  //setup inut output pins as input or output  Yes the numbers are weird, It;s because of the weird forfactor of the ESP32 Dekit-1 That I chose
+  //setup inut output pins as input or output Yes the numbers are weird, It’s because of the weird form factor of the ESP32 Dekit-1 that I chose
   //The numbers are out of order here so they line up nice in the circuit design, makes my life easier.
   pinMode(LED_PIN,OUTPUT);
   pinMode(6,INPUT);
@@ -25,7 +25,7 @@ void setup() {
   pinMode(18,INPUT);
   pinMode(5,OUTPUT);
 
-  //Taking inthe switch values and detemining the umber of LEDs present in the Light.  Thanks to Brendon Gluth(https://github.com/BGluth) for help with the boolean logic in this part of the code.
+  //Taking in the switch values and determining the number of LEDs present in the Light.  Thanks to Brendon Gluth(https://github.com/BGluth) for help with the Boolean logic in this part of the code.
   ledInpuSwitches |= digitalRead(6) << 0;
   ledInpuSwitches |= digitalRead(7) << 1;
   ledInpuSwitches |= digitalRead(8) << 2;
@@ -37,7 +37,7 @@ void setup() {
 
   //Taking the base number and doubling it if necessary
   numLEDs = (int)ledInpuSwitches * (digitalRead(17) + 1);
-  //Initialize Leds Strip/string
+  //Initialize LEDs Strip/String
   strip = Adafruit_NeoPixel(numLEDs, LED_PIN, NEO_GRB + NEO_KHZ800);
   //Setup Pointer array for effects functions
   effects[0] = flashGreenRed;
@@ -56,7 +56,8 @@ void setup() {
 
 void loop() 
 {
-    
+  //calling the effect function based of the mode
+  effects[mode]();
 }
 
 
